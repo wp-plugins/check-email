@@ -4,7 +4,7 @@ Donate link: http://www.stillbreathing.co.uk/donate/
 Tags: check, test, email, smtp, pop, send, delivery
 Requires at least: 2.7
 Tested up to: 3.0.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 
 Check email allows you to test if your WordPress installation is sending emails correctly by sending a test email to an address of your choice. Allows overriding of email headers and carbon copying to another address.
 
@@ -25,6 +25,10 @@ Install the plugin from the plugin repository and activate.
 Someone using one of my other plugins had trouble with emails not being sent. I knocked this together to help him (and anyone else).
 
 == Changelog ==
+
+= 0.1.2 =
+
+Fixed bug in Plugin Register caused by latest version of WordPress
 
 = 0.1.1 =
 

@@ -33,17 +33,18 @@ if ( !class_exists( "Plugin_Register" ) ) {
 		var $register_message = "";
 		var $thanks_message = "";
 		function Plugin_Register() {
+			@session_start();
 			register_activation_hook( $this->file, array( $this, "Activated" ) );
 			add_action( "admin_notices", array( $this, "Registration" ) );
 		}
 		function Activated() {
 			if ( $this->slug != "" && $this->name != "" && $this->version != "" ) {
-				header( "Location: plugins.php?activate=true&plugin_status=all&" . $this->slug . "=activated&paged=" . @$_GET["paged"] );
-				exit();
+				$_SESSION["activated_plugin"] = $this->slug;
 			}
 		}
 		function Registration() {
-			if ( isset( $_GET[$this->slug] ) && $_GET[$this->slug] == "activated" ) {
+			if ( isset( $_SESSION["activated_plugin"] ) && $_SESSION["activated_plugin"] == $this->slug ) {
+			$_SESSION["activated_plugin"] = "";
 			echo '
 			<div id="message" class="updated fade">
 				<p style="line-height:1.4em">
@@ -63,23 +64,16 @@ if ( !class_exists( "Plugin_Register" ) ) {
 				$site = get_option( "blogname" );
 				$url = get_option( "siteurl" );
 				$register_url = trim( $this->homepage, "/" ) . "/?plugin=" . urlencode( $this->name ) . "&version=" . urlencode( $this->version ) . "&site=" . urlencode( $site ) . "&url=" . urlencode( $url );
-				$response = wp_remote_get( $register_url );
-				$code = (int) wp_remote_retrieve_response_code( $response );
+				wp_remote_fopen( $register_url );
 				echo '
 				<div id="message" class="updated fade">
 					<p>';
-					if ( $code == 200 ) {
-						if ( $this->thanks_message == "" ) {
-							echo '
-							<strong>Thank you for registering ' . $this->name . '.</strong>
-							';
-						} else {
-							echo $this->thanks_message;
-						}
-					} else {
+					if ( $this->thanks_message == "" ) {
 						echo '
-						<strong>Sorry, ' . $this->name . ' could not be registered. <a href="plugins.php?paged=' . @$_GET["paged"] . '&amp;' . $this->slug . '=register">Please try again</a>.</strong>
+						<strong>Thank you for registering ' . $this->name . '.</strong>
 						';
+					} else {
+						echo $this->thanks_message;
 					}
 					echo '
 					</p>
