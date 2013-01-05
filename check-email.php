@@ -3,7 +3,7 @@
 Plugin Name: Check Email
 Plugin URI: http://www.stillbreathing.co.uk/wordpress/check-email/
 Description: Check email allows you to test if your WordPress installation is sending emails correctly.
-Version: 0.1.1
+Version: 0.1.3
 Author: Chris Taylor
 Author URI: http://www.stillbreathing.co.uk
 */
@@ -14,7 +14,7 @@ $register = new Plugin_Register();
 $register->file = __FILE__;
 $register->slug = "checkemail";
 $register->name = "Check Email";
-$register->version = "0.1.1";
+$register->version = "0.1.3";
 $register->developer = "Chris Taylor";
 $register->homepage = "http://www.stillbreathing.co.uk";
 $register->Plugin_Register();
