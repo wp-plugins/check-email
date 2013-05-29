@@ -3,7 +3,7 @@
 Plugin Name: Check Email
 Plugin URI: http://www.stillbreathing.co.uk/wordpress/check-email/
 Description: Check email allows you to test if your WordPress installation is sending emails correctly.
-Version: 0.2
+Version: 0.3
 Author: Chris Taylor
 Author URI: http://www.stillbreathing.co.uk
 */
@@ -22,7 +22,7 @@ $register->Plugin_Register();
 // add the admin menu option
 add_action( 'admin_menu', 'checkemail_add_admin' );
 function checkemail_add_admin() {
-	add_submenu_page( 'options-general.php', __("Check Email", "checkemail"), __("Check Email", "checkemail"), 'edit_users', 'checkemail', 'checkemail' );
+	add_submenu_page( 'tools.php', __("Check Email", "checkemail"), __("Check Email", "checkemail"), 'edit_users', 'checkemail', 'checkemail' );
 }
 
 // add the JavaScript
@@ -86,7 +86,7 @@ function checkemail() {
 	echo '
 	<h2>' . __( "Check Email" ) . '</h2>
 	
-	<form action="options-general.php?page=checkemail" method="post">
+	<form action="tools.php?page=checkemail" method="post">
 	<p>SMTP server: ' . ini_get("SMTP") . '</p>
 	<p><label for="checkemail_to">' . __( "Send test email to:", "checkemail" ) . '</label>
 	<input type="text" name="checkemail_to" id="checkemail_to" class="text"';
