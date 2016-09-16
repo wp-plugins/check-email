@@ -3,8 +3,8 @@ Contributors: mrwiblog
 Donate link: http://www.stillbreathing.co.uk/donate/
 Tags: check, test, email, smtp, pop, send, delivery
 Requires at least: 2.7
-Tested up to: 4.2
-Stable tag: 0.3
+Tested up to: 4.6.1
+Stable tag: 0.4
 
 Check email allows you to test if your WordPress installation is sending emails correctly by sending a test email to an address of your choice. Allows overriding of email headers and carbon copying to another address.
 
