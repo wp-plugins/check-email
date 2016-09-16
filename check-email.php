@@ -70,7 +70,26 @@ function checkemail_add_css() {
 
 // load the check email admin page
 function checkemail() {
-	global $current_user;
+	global $current_user, $phpmailer;
+
+	// (Re)create it, if it's gone missing
+	if ( ! ( $phpmailer instanceof PHPMailer ) ) {
+		require_once ABSPATH . WPINC . '/class-phpmailer.php';
+		require_once ABSPATH . WPINC . '/class-smtp.php';
+		$phpmailer = new PHPMailer( true );
+	}
+
+	/**
+	 * Fires after PHPMailer is initialized.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param PHPMailer &$phpmailer The PHPMailer instance, passed by reference.
+	 */
+	ob_start();
+	do_action_ref_array( 'phpmailer_init', array( &$phpmailer ) );
+	ob_end_clean();
+	
 
 	echo '
 	<div id="checkemail" class="wrap">
@@ -86,7 +105,13 @@ function checkemail() {
 	<h2>' . __( "Check Email" ) . '</h2>
 	
 	<form action="tools.php?page=checkemail" method="post">
-	<p>SMTP server: ' . ini_get("SMTP") . '</p>
+	
+	<p>' . __( "SMTP server:", "check-email" ) . ' ' . $phpmailer->Host . '</p>
+	<p>' . __( "SMTP port:", "check-email" ) . ' ' . $phpmailer->Port . '</p>
+	<p>' . __( "SMTP Auth Type:", "check-email" ) . ' ' . $phpmailer->AuthType . '</p>
+	<p>' . __( "SMTP Username:", "check-email" ) . ' ' . $phpmailer->Username . '</p>
+	<p>' . __( "SMTP From:", "check-email" ) . ' ' . $phpmailer->From . '</p>
+	
 	<p><label for="checkemail_to">' . __( "Send test email to:", "checkemail" ) . '</label>
 	<input type="text" name="checkemail_to" id="checkemail_to" class="text"';
 		if ( isset( $_POST["checkemail_to"] ) ) {
