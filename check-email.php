@@ -3,7 +3,7 @@
 Plugin Name: Check Email
 Plugin URI: http://www.stillbreathing.co.uk/wordpress/check-email/
 Description: Check email allows you to test if your WordPress installation is sending emails correctly.
-Version: 0.3
+Version: 0.4
 Author: Chris Taylor
 Author URI: http://www.stillbreathing.co.uk
 */
@@ -89,7 +89,7 @@ function checkemail() {
 	ob_start();
 	do_action_ref_array( 'phpmailer_init', array( &$phpmailer ) );
 	ob_end_clean();
-	
+
 
 	echo '
 	<div id="checkemail" class="wrap">
