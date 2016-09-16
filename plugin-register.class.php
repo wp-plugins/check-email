@@ -32,7 +32,7 @@ if ( !class_exists( "Plugin_Register" ) ) {
 		var $file = "";
 		var $register_message = "";
 		var $thanks_message = "";
-		function Plugin_Register() {
+		function __construct() {
 			@session_start();
 			register_activation_hook( $this->file, array( $this, "Activated" ) );
 			add_action( "admin_notices", array( $this, "Registration" ) );

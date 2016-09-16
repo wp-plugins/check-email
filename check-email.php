@@ -17,7 +17,6 @@ $register->name = "Check Email";
 $register->version = "0.2";
 $register->developer = "Chris Taylor";
 $register->homepage = "http://www.stillbreathing.co.uk";
-$register->Plugin_Register();
 
 // add the admin menu option
 add_action( 'admin_menu', 'checkemail_add_admin' );
